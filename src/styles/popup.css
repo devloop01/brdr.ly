@@ -1,0 +1,419 @@
+:root {
+  font-size: 16px;
+  --app-width: 380px;
+  --app-height: 500px;
+  --app-background: #252525;
+  --header-height: 60px;
+  --box-width: 160px;
+  --box-height: 160px;
+  --box-color: #00c2ff;
+  --handle-size: 16px;
+  --controls-width: 220px;
+  --controls-height: 220px;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: var(--app-width);
+  height: var(--app-height);
+  background-color: var(--app-background);
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: var(--header-height) 1fr;
+      grid-template-rows: var(--header-height) 1fr;
+  color: #fff;
+}
+
+button {
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+  color: #fff;
+}
+
+button:focus {
+  outline: none;
+}
+
+header {
+  display: -ms-grid;
+  display: grid;
+  place-content: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+header .logo {
+  font-size: 1.25rem;
+}
+
+main {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 1fr calc(var(--header-height) * 3);
+      grid-template-rows: 1fr calc(var(--header-height) * 3);
+}
+
+.generator {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.generator #box {
+  width: var(--box-width);
+  height: var(--box-height);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  background: var(--box-color);
+  border-radius: calc(var(--htl) * 1%) calc(var(--htr) * 1%) calc(var(--hbr) * 1%) calc(var(--hbl) * 1%)/calc(var(--vtl) * 1%) calc(var(--vtr) * 1%) calc(var(--vbr) * 1%) calc(var(--vbl) * 1%);
+  z-index: 10;
+  overflow: hidden;
+}
+
+.generator #box label {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: none;
+  cursor: pointer;
+}
+
+.generator #box input[type="color"] {
+  display: none;
+}
+
+.generator .controls__wrapper {
+  width: calc(var(--controls-width));
+  height: calc(var(--controls-height));
+  display: -ms-grid;
+  display: grid;
+}
+
+.generator .controls__wrapper .controls {
+  -ms-grid-row: 1;
+  grid-row: 1/1;
+  -ms-grid-column: 1;
+  grid-column: 1/1;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.generator .controls__wrapper .radius--controls {
+  outline: 2px solid rgba(255, 255, 255, 0.3);
+  outline-offset: calc(-0.55 * var(--handle-size));
+}
+
+.generator .controls__wrapper .radius--controls .radius-handle {
+  width: var(--handle-size);
+  height: var(--handle-size);
+  border-radius: 50%;
+  position: absolute;
+  cursor: pointer;
+  z-index: 2;
+  -webkit-transition: -webkit-box-shadow 150ms ease;
+  transition: -webkit-box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease, -webkit-box-shadow 150ms ease;
+}
+
+.generator .controls__wrapper .radius--controls .radius-handle.radius-handle-x {
+  --guide-rotation: 0deg;
+}
+
+.generator .controls__wrapper .radius--controls .radius-handle.radius-handle-y {
+  --guide-rotation: 90deg;
+}
+
+.generator .controls__wrapper .radius--controls .radius-handle:hover, .generator .controls__wrapper .radius--controls .radius-handle:active {
+  -webkit-box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.25);
+          box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.25);
+}
+
+.generator .controls__wrapper .radius--controls .radius-handle-htl, .generator .controls__wrapper .radius--controls .radius-handle-vtl {
+  background: #fff;
+  left: 0;
+  top: 0;
+}
+
+.generator .controls__wrapper .radius--controls .radius-handle-htr, .generator .controls__wrapper .radius--controls .radius-handle-vtr {
+  background: #dd6031;
+  right: 0;
+  top: 0;
+}
+
+.generator .controls__wrapper .radius--controls .radius-handle-hbl, .generator .controls__wrapper .radius--controls .radius-handle-vbl {
+  background: #3da5d9;
+  left: 0;
+  bottom: 0;
+}
+
+.generator .controls__wrapper .radius--controls .radius-handle-hbr, .generator .controls__wrapper .radius--controls .radius-handle-vbr {
+  background: #f6f930;
+  right: 0;
+  bottom: 0;
+}
+
+.generator .controls__wrapper .dimension--controls .dimension-slider {
+  --offset: 25px;
+  position: absolute;
+  width: calc(100% - var(--handle-size));
+}
+
+.generator .controls__wrapper .dimension--controls .dimension-slider.width-slider {
+  left: 0;
+  bottom: calc(-1 * var(--offset));
+  -webkit-transform: translateX(calc(0.5 * var(--handle-size)));
+          transform: translateX(calc(0.5 * var(--handle-size)));
+}
+
+.generator .controls__wrapper .dimension--controls .dimension-slider.height-slider {
+  top: 0;
+  right: calc(-1 * var(--offset));
+  -webkit-transform-origin: right center;
+          transform-origin: right center;
+  -webkit-transform: translateY(calc(0.5 * var(--handle-size))) rotate(-90deg);
+          transform: translateY(calc(0.5 * var(--handle-size))) rotate(-90deg);
+}
+
+.generator .controls__wrapper .dimension--controls input[type="range"] {
+  -webkit-appearance: none;
+  background: transparent;
+  margin-bottom: 10px;
+}
+
+.generator .controls__wrapper .dimension--controls input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+
+.generator .controls__wrapper .dimension--controls input[type="range"]:focus {
+  outline: none;
+}
+
+.generator .controls__wrapper .dimension--controls input[type="range"]::-ms-track {
+  width: 100%;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+
+.generator .controls__wrapper .dimension--controls input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: var(--handle-size);
+  width: var(--handle-size);
+  border-radius: 50px;
+  cursor: pointer;
+  margin-top: -7.5px;
+  background: #ccc;
+}
+
+.generator .controls__wrapper .dimension--controls input[type="range"]::-webkit-slider-thumb:hover {
+  background: #367ebd;
+}
+
+.generator .controls__wrapper .dimension--controls input[type="range"]::-moz-range-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 36px;
+  width: 16px;
+  border-radius: 3px;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+.generator .controls__wrapper .dimension--controls input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 2px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 1.3px;
+}
+
+.generator .controls__wrapper .dimension--controls input[type="range"]::-moz-range-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #3071a9;
+  border-radius: 1.3px;
+  border: 0.2px solid #010101;
+}
+
+.actions__wrapper label span,
+.document__actions label span {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  margin-right: 8px;
+}
+
+.actions__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.actions__wrapper .border-radius__text {
+  padding: 0.5rem;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-radius: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.actions__wrapper .actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.actions__wrapper .actions button,
+.actions__wrapper .actions label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: inherit;
+  cursor: pointer;
+}
+
+.actions__wrapper .actions button {
+  width: 100px;
+  height: 30px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 0.5rem;
+  -webkit-transition: background 150ms ease;
+  transition: background 150ms ease;
+}
+
+.actions__wrapper .actions button:focus {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.actions__wrapper .actions label {
+  margin-left: 2rem;
+}
+
+.actions__wrapper #btn--more {
+  margin-top: 1.25rem;
+  font-size: 0.75rem;
+  opacity: 0.5;
+  -webkit-transition: opacity 150ms ease;
+  transition: opacity 150ms ease;
+}
+
+.actions__wrapper #btn--more:hover {
+  opacity: 1;
+}
+
+.document__actions {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 10;
+  background: rgba(22, 22, 22, 0.85);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  width: 65%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 0 1rem;
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+  -webkit-transition: -webkit-transform 400ms ease;
+  transition: -webkit-transform 400ms ease;
+  transition: transform 400ms ease;
+  transition: transform 400ms ease, -webkit-transform 400ms ease;
+}
+
+.document__actions.active {
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+}
+
+.document__actions .selector--text__wrapper {
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+}
+
+.document__actions .selector--text__wrapper input[type="text"] {
+  background: none;
+  border: none;
+  color: #fff;
+  border-bottom: 1px solid #fff;
+  width: 120px;
+  padding: 0.5rem;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-radius: 0.5rem;
+}
+
+.document__actions .selector--text__wrapper input[type="text"]:focus {
+  outline: none;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.document__actions .selector--text__wrapper + label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.document__actions button {
+  position: absolute;
+  left: 50%;
+  bottom: 6%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+/*# sourceMappingURL=popup.css.map */
