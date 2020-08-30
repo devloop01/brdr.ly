@@ -1,4 +1,4 @@
-# Borderly - Create Awesome Shapes with CSS
+# Borderly
 
 #### A tool that will help you get your CSS border radius easily
 
