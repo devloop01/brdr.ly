@@ -1,6 +1,6 @@
 # Borderly
 
-#### A tool that will help you quickly get your CSS border radius easily
+#### A tool that will help you get your CSS border radius easily
 
 ## Screenshots
 
