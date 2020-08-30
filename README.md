@@ -2,7 +2,9 @@
 
 #### A tool that will help you get your CSS border radius easily
 
-## Screenshots
+![Demo Gif](https://i.imgur.com/dQ0OlYR.gif)
+
+It will help you create awesome shapes with just CSS
 
 ## Features
 
