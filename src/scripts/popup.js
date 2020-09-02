@@ -269,7 +269,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	}
 
 	function changeRadiusTextFontSize() {
-		const fontSize = map(clamp(Math.round((borderRadiusText.length / 38) * 14), 10, 14), 10, 14, 14, 10);
+		const fontSize = map(clamp(Math.round((borderRadiusText.length / 38) * 15), 11, 15), 11, 15, 15, 11);
 		document.documentElement.style.setProperty("--radius-text-font-size", fontSize + "px");
 	}
 
