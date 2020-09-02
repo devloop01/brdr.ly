@@ -1,14 +1,4 @@
 @font-face {
-  font-family: "MontserratRegular";
-  src: url("../fonts/Montserrat-Regular.otf");
-}
-
-@font-face {
-  font-family: "MontserratMedium";
-  src: url("../fonts/Montserrat-Medium.otf");
-}
-
-@font-face {
   font-family: "MontserratExtraBold";
   src: url("../fonts/Montserrat-ExtraBold.otf");
 }
@@ -304,7 +294,6 @@ main {
   border: 2px solid rgba(255, 255, 255, 0.25);
   border-radius: 0.5rem;
   margin-bottom: 1.25rem;
-  font-family: "MontserratRegular";
   font-size: var(--radius-text-font-size);
   font-variant-numeric: tabular-nums;
 }
@@ -328,7 +317,6 @@ main {
           align-items: center;
   color: inherit;
   cursor: pointer;
-  font-family: "MontserratMedium";
 }
 
 .actions__wrapper .actions button {
