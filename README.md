@@ -23,6 +23,10 @@ It is simple but I'd love any PR's or suggetions to make it better
 -   Better UI
 -   Porting to other browsers
 
+## Credits
+
+-   [Draggabilly](https://draggabilly.desandro.com/) by **[Dave Desandro](https://twitter.com/desandro)**
+
 ---
 
 Made with ❤️ by **[Sikriti Dakua](https://twitter.com/DevLoop01)**
