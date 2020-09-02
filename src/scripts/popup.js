@@ -9,8 +9,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	// **** DOM ELEMENTS - START ****
 
-	// box element
-	const boxEl = document.getElementById("box");
 	// input color el
 	const boxColorInput = document.getElementById("box-color");
 
@@ -171,8 +169,8 @@ document.addEventListener("DOMContentLoaded", function () {
 	//**** Initialize Function ****
 	function init() {
 		updateRadiusText();
-		// if (savedHandlePostions) initHandlePosition();
 		initHandlePosition();
+		changeRadiusTextFontSize();
 
 		linkedCheckbox.checked = linked;
 		copyDimensionCheckbox.checked = copyDOMElDimension;
@@ -264,9 +262,15 @@ document.addEventListener("DOMContentLoaded", function () {
 			}
 		}
 
+		changeRadiusTextFontSize();
 		updateRadiusText();
 		sendDataToTab();
 		updateLocalStorage();
+	}
+
+	function changeRadiusTextFontSize() {
+		const fontSize = map(clamp(Math.round((borderRadiusText.length / 42) * 12), 10, 12), 10, 12, 12, 10);
+		document.documentElement.style.setProperty("--radius-text-font-size", fontSize + "px");
 	}
 
 	// this function sends all the data required to the current tab

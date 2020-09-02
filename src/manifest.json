@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "Borderly",
-	"version": "1.0.0",
+	"version": "1.0.2",
 	"description": "A tool that will help you quickly get your CSS border radius easily",
 	"permissions": ["activeTab"],
 	"content_scripts": [

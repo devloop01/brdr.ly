@@ -4,6 +4,21 @@
 	align-items: center;
 }
 
+@font-face {
+	font-family: "MontserratRegular";
+	src: url("../fonts/Montserrat-Regular.otf");
+}
+
+@font-face {
+	font-family: "MontserratMedium";
+	src: url("../fonts/Montserrat-Medium.otf");
+}
+
+@font-face {
+	font-family: "MontserratExtraBold";
+	src: url("../fonts/Montserrat-ExtraBold.otf");
+}
+
 :root {
 	font-size: 16px;
 
@@ -22,6 +37,8 @@
 
 	--controls-width: 220px;
 	--controls-height: 220px;
+
+	--radius-text-font-size: 12px;
 }
 
 * {
@@ -54,6 +71,7 @@ header {
 	display: grid;
 	place-content: center;
 	border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+	font-family: "MontserratExtraBold";
 	.logo {
 		font-size: 1.25rem;
 	}
@@ -118,18 +136,6 @@ main {
 				cursor: pointer;
 				z-index: 2;
 				transition: box-shadow 150ms ease;
-
-				// &::after {
-				// 	content: "";
-				// 	position: absolute;
-				// 	top: 50%;
-				// 	left: 50%;
-				// 	width: var(--handle-size);
-				// 	height: 2px;
-				// 	transform: translate(-50%, -50%) rotate(var(--guide-rotation, 0deg));
-				// 	background: rgba(255, 255, 255, 0.5);
-				// 	mix-blend-mode: difference;
-				// }
 
 				&.radius-handle-x {
 					--guide-rotation: 0deg;
@@ -268,6 +274,9 @@ main {
 		border: 2px solid rgba(255, 255, 255, 0.25);
 		border-radius: 0.5rem;
 		margin-bottom: 1.25rem;
+		font-family: "MontserratRegular";
+		font-size: var(--radius-text-font-size);
+		font-variant-numeric: tabular-nums;
 	}
 
 	.actions {
@@ -278,6 +287,7 @@ main {
 			@include flex-center();
 			color: inherit;
 			cursor: pointer;
+			font-family: "MontserratMedium";
 		}
 
 		button {
@@ -286,6 +296,7 @@ main {
 			background: rgba(255, 255, 255, 0.25);
 			border-radius: 0.5rem;
 			transition: background 150ms ease;
+			font-size: 0.7rem;
 			&:focus {
 				background: rgba(255, 255, 255, 0.4);
 			}

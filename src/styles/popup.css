@@ -1,3 +1,18 @@
+@font-face {
+  font-family: "MontserratRegular";
+  src: url("../fonts/Montserrat-Regular.otf");
+}
+
+@font-face {
+  font-family: "MontserratMedium";
+  src: url("../fonts/Montserrat-Medium.otf");
+}
+
+@font-face {
+  font-family: "MontserratExtraBold";
+  src: url("../fonts/Montserrat-ExtraBold.otf");
+}
+
 :root {
   font-size: 16px;
   --app-width: 380px;
@@ -10,6 +25,7 @@
   --handle-size: 16px;
   --controls-width: 220px;
   --controls-height: 220px;
+  --radius-text-font-size: 12px;
 }
 
 * {
@@ -47,6 +63,7 @@ header {
   display: grid;
   place-content: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  font-family: "MontserratExtraBold";
 }
 
 header .logo {
@@ -287,6 +304,9 @@ main {
   border: 2px solid rgba(255, 255, 255, 0.25);
   border-radius: 0.5rem;
   margin-bottom: 1.25rem;
+  font-family: "MontserratRegular";
+  font-size: var(--radius-text-font-size);
+  font-variant-numeric: tabular-nums;
 }
 
 .actions__wrapper .actions {
@@ -308,6 +328,7 @@ main {
           align-items: center;
   color: inherit;
   cursor: pointer;
+  font-family: "MontserratMedium";
 }
 
 .actions__wrapper .actions button {
@@ -317,6 +338,7 @@ main {
   border-radius: 0.5rem;
   -webkit-transition: background 150ms ease;
   transition: background 150ms ease;
+  font-size: 0.7rem;
 }
 
 .actions__wrapper .actions button:focus {
