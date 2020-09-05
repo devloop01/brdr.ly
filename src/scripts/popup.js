@@ -312,18 +312,25 @@ document.addEventListener("DOMContentLoaded", function () {
 	}
 
 	function sendMessage(data) {
-		chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-			chrome.tabs.sendMessage(tabs[0].id, data, (response) => {
-				copyDimensionCheckbox.disabled = response === undefined;
+		const sendData = {
+			from: "popup",
+			data,
+		};
 
-				if (response !== undefined) {
-					isDOMElValid = response.isDOMElValid;
-					if (isDOMElValid && response.dimension && copyDOMElDimension)
-						DOMElDimension = { ...response.dimension };
-				} else {
-					copyDimensionCheckbox.checked = false;
-				}
-			});
-		});
+		chrome.runtime.sendMessage(sendData);
 	}
+
+	// recieve the message from the background
+	chrome.runtime.onMessage.addListener((msg) => {
+		if (msg.from == "background") {
+			copyDimensionCheckbox.disabled = msg.data === undefined;
+			if (msg.data !== undefined) {
+				isDOMElValid = msg.data.isDOMElValid;
+				if (isDOMElValid && msg.data.dimension && copyDOMElDimension)
+					DOMElDimension = { ...msg.data.dimension };
+			} else {
+				copyDimensionCheckbox.checked = false;
+			}
+		}
+	});
 });
