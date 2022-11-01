@@ -4,7 +4,7 @@
   "description": "A tool that will help you quickly create fancy CSS shapes easily",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/devloop01/borderly"
   },
   "type": "module",
   "scripts": {
