@@ -2,6 +2,8 @@
   "name": "brdr-ly",
   "version": "2.0.0",
   "description": "A tool that will help you quickly create fancy CSS shapes easily",
+  "author": "Sikriti Dakua",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/devloop01/borderly"
@@ -34,5 +36,10 @@
     "tailwindcss": "^3.2.1",
     "typescript": "^4.6.4",
     "vite": "^3.1.0"
-  }
+  },
+  "keywords": [
+    "chrome",
+    "extension",
+    "tools"
+  ]
 }
