@@ -1,0 +1,5 @@
+import './popup.css'
+
+import Popup from './Popup.svelte'
+
+new Popup({ target: document.body })
