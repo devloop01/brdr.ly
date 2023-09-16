@@ -4,10 +4,13 @@
   html {
     @apply antialiased;
   }
+
   body {
     @apply h-auto min-w-[450px] font-poppins;
   }
+}
 
+@layer utilities {
   .generator:hover > .radius-handle:hover,
   .generator:hover > .radius-handle:hover::before {
     @apply scale-100 opacity-100;
