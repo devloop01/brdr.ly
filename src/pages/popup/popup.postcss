@@ -1,0 +1,101 @@
+@import '~/styles/global.postcss';
+
+@layer base {
+	html {
+		@apply antialiased;
+	}
+
+	body {
+		@apply h-auto min-w-[450px];
+	}
+}
+
+.generator {
+	--mouse-x: 0;
+	--mouse-y: 0;
+
+	position: relative;
+	margin: 0 auto;
+	height: 60vmin;
+	width: 60vmin;
+	padding: 1rem;
+
+	&:hover {
+		& > .generator-handle,
+		& > .generator-handle::before {
+			--opacity: 0.5;
+			--scale: 0.75;
+		}
+
+		& > .generator-shape__wrapper {
+			border-color: rgb(255 255 255 / 1);
+		}
+	}
+}
+
+.generator-shape__wrapper {
+	height: 100%;
+	width: 100%;
+	border: 1px dashed rgb(255 255 255 / 0.25);
+	transition-property: border;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 300ms;
+}
+
+.generator-shape {
+	height: 100%;
+	width: 100%;
+	border: 1px solid var(--purple-light);
+	background: var(--purple-light);
+	background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), var(--purple-light) 0%, var(--purple-dark) 100%);
+	box-shadow: 1.25rem 1.25rem 0 0 rgb(0 0 0 / 0.2);
+}
+
+.generator-handle {
+	--size: 2rem;
+	--scale: 0.5;
+	--opacity: 0.25;
+	--ring-opacity: 0;
+	--ring-size: 0px;
+
+	position: absolute;
+	left: 0;
+	top: 0;
+	display: block;
+	height: var(--size);
+	width: var(--size);
+	cursor: grab;
+	touch-action: none;
+	transition-property: opacity;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 300ms;
+
+	&::before {
+		content: '';
+		width: 50%;
+		height: 50%;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%) scale(var(--scale));
+		border-radius: 50%;
+		background-color: white;
+		opacity: var(--opacity);
+		transition-property: opacity, transform, box-shadow, background;
+		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+		transition-duration: 300ms;
+		box-shadow: 0 0 0 var(--ring-size) rgb(255 255 255 / var(--ring-opacity));
+	}
+
+	&:hover {
+		--scale: 1;
+	}
+
+	&:hover::before {
+		--ring-opacity: 1;
+		--opacity: 1;
+		--ring-size: 8px;
+		background-color: var(--purple-light);
+	}
+}
+
