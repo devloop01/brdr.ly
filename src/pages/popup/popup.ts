@@ -1,5 +1,6 @@
-import './popup.css'
+import './popup.postcss';
 
-import Popup from './Popup.svelte'
+import Popup from './popup.svelte';
 
-new Popup({ target: document.body })
+new Popup({ target: document.body });
+

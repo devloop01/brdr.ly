@@ -1,0 +1,37 @@
+/* @import './fonts.css'; */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	:root {
+		--text: hsl(124, 44%, 7%);
+		--background: hsl(120, 60%, 99%);
+		--primary: hsl(155, 46%, 69%);
+		--secondary: hsl(307, 46%, 89%);
+		--accent: hsl(335, 45%, 49%);
+
+		--background: 0 0% 100%;
+		--foreground: 240 10% 3.9%;
+		--purple-light: #9059ff;
+		--purple-dark: #5a2bcc;
+		--yellow-light: #ffe980;
+		--yellow-dark: #fdba31;
+		--pink-light: #ffdfe7;
+		--pink-dark: #ff4251;
+		--green-light: #e3fff3;
+		--green-dark: #07f49e;
+	}
+
+	.dark {
+		:root {
+			--text: hsl(120, 60%, 99%);
+			--background: hsl(124, 44%, 7%);
+			--primary: hsl(155, 46%, 69%);
+			--secondary: hsl(308, 48%, 9%);
+			--accent: hsl(335, 44%, 79%);
+		}
+	}
+}
+
