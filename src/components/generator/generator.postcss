@@ -9,14 +9,13 @@
 	padding: 1rem;
 
 	&:hover {
-		& > [data-generator-handle],
-		& > [data-generator-handle]::before {
-			--opacity: 0.5;
-			--scale: 0.75;
+		& > [data-generator-handle] {
+			--opacity: 0.7;
+			--scale: 0.7;
 		}
 
 		& > [data-generator-shape-wrapper] {
-			border-color: rgb(255 255 255 / 0.85);
+			border-color: rgb(255 255 255 / 0.75);
 		}
 	}
 }
@@ -24,19 +23,18 @@
 [data-generator-shape-wrapper] {
 	height: 100%;
 	width: 100%;
-	border: 2px dashed rgb(255 255 255 / 0);
+	border: 2px dashed rgb(255 255 255 / 0.25);
 	transition-property: border;
 	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 	transition-duration: 300ms;
-	box-shadow: 1.25rem 1.25rem 0 0 rgb(0 0 0 / 0.2);
 }
 
 [data-generator-shape] {
 	height: 100%;
 	width: 100%;
-	border: 1px solid rgb(255 255 255 / 0.25);
 	background: var(--purple-light);
 	background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), var(--purple-light) 0%, var(--purple-dark) 100%);
+	box-shadow: 1.25rem 1.25rem 0 0 rgb(0 0 0 / 0.2);
 }
 
 [data-generator-handle] {
@@ -54,9 +52,6 @@
 	width: var(--size);
 	cursor: grab;
 	touch-action: none;
-	transition-property: opacity;
-	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-	transition-duration: 300ms;
 
 	&::before {
 		content: '';
@@ -75,14 +70,12 @@
 		box-shadow: 0 0 0 var(--ring-size) rgb(255 255 255 / var(--ring-opacity));
 	}
 
-	&:hover {
-		--scale: 1;
-	}
-
 	&:hover::before {
-		--ring-opacity: 1;
+		--scale: 1;
 		--opacity: 1;
 		--ring-size: 8px;
+		--ring-opacity: 1;
+
 		background-color: var(--purple-light);
 	}
 }
