@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { createRadiusTextFromHandles } from '~/utils';
+	import './generator.postcss';
+
 	import Handle from './handle.svelte';
 	import { ctx } from '~/context';
 
