@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { createRadiusTextFromHandles } from '~/utils';
 	import Handle from './handle.svelte';
-	import { ctx } from '~/pages/popup/ctx';
+	import { ctx } from '~/context';
 
 	const {
 		states: { handles }
-	} = ctx.get();
+	} = ctx.popup.get();
 </script>
 
 <div class="generator">

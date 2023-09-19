@@ -6,7 +6,7 @@
 	import { DragGesture } from '@use-gesture/vanilla';
 
 	import { clamp, mapRange } from '~/utils';
-	import { ctx } from '~/pages/popup/ctx';
+	import { ctx } from '~/context';
 
 	export let handle: Handle;
 
@@ -15,11 +15,11 @@
 	const {
 		states: { changedAt, handles },
 		helpers: { update }
-	} = ctx.get();
+	} = ctx.popup.get();
 
 	const positionStyles = writable('');
 
-	const drag: Action<HTMLElement> = (node) => {
+	const drag: Action = (node) => {
 		const containment = node.parentElement!;
 
 		let currentMatrix = new DOMMatrix();

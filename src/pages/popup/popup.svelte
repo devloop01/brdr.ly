@@ -4,13 +4,13 @@
 <script lang="ts">
 	import { RefreshIcon, ShuffleIcon } from '~/icons';
 	import { Button, PopupHeader, Generator } from '~/components';
-	import { createRadiusTextFromHandles, cx, writeToClipboard } from '~/utils';
-	import { ctx } from './ctx';
+	import { createRadiusTextFromHandles, writeToClipboard } from '~/utils';
+	import { ctx } from '~/context';
 
 	const {
 		states: { handles },
 		helpers: { reset, shuffle }
-	} = ctx.set();
+	} = ctx.popup.set();
 
 	let clicked = false;
 	$: radius = createRadiusTextFromHandles($handles);
