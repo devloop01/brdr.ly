@@ -8,3 +8,5 @@ export interface Handle {
 	position: [number, number];
 }
 
+export type Theme = 'light' | 'dark';
+
