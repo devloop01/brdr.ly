@@ -49,7 +49,7 @@
 	</header>
 
 	<main class="bg-gradient-grid px-6 py-4">
-		<Generator />
+		<Generator {radius} />
 
 		<div class="flex flex-col gap-2">
 			<div>
