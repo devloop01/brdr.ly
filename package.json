@@ -11,8 +11,9 @@
 	},
 	"type": "module",
 	"scripts": {
-		"dev": "vite",
-		"build": "rimraf dist && vite build",
+		"clean": "rimraf dist",
+		"dev": "pnpm clean && vite",
+		"build": "pnpm clean && vite build",
 		"check": "svelte-check --tsconfig ./tsconfig.json",
 		"changeset": "changeset"
 	},
