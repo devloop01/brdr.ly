@@ -14,7 +14,7 @@
 
 	const {
 		states: { changedAt, handles },
-		helpers: { update }
+		helpers: { updateHandle }
 	} = ctx.popup.get().handles;
 
 	const positionStyles = writable('');
@@ -35,7 +35,7 @@
 
 				const progress = handle.axis === 'x' ? p[0] : p[1];
 
-				update(handle.id, progress);
+				updateHandle(handle.id, progress);
 
 				const currentMatrix = new DOMMatrix(node.style.transform);
 				node.style.transform = currentMatrix.translate(dx, dy).toString();

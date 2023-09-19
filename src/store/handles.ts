@@ -20,7 +20,7 @@ export function createHandles() {
 			changedAt: { subscribe: changedAt.subscribe }
 		},
 		helpers: {
-			update: (id: string, progress: number) => {
+			updateHandle: (id: string, progress: number) => {
 				localUpdate((handles) => {
 					const updatedHandles = handles.map((handle) => ({
 						...handle,
@@ -29,11 +29,11 @@ export function createHandles() {
 					return updatedHandles;
 				});
 			},
-			reset: () => {
+			resetHandles: () => {
 				changedAt.set(Date.now());
 				set(HANDLES_INITIAL_STATE);
 			},
-			shuffle: () => {
+			shuffleHandles: () => {
 				changedAt.set(Date.now());
 				localUpdate((handles) => {
 					const updatedHandles = handles.map((handle) => ({

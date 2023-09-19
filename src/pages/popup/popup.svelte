@@ -9,7 +9,7 @@
 
 	const {
 		states: { handles },
-		helpers: { reset, shuffle }
+		helpers: { resetHandles, shuffleHandles }
 	} = ctx.popup.set().handles;
 
 	let clicked = false;
@@ -25,18 +25,10 @@
 		writeToClipboard('border-radius: ' + radius);
 	};
 
-	const resetHandler = () => {
-		reset();
-	};
-
-	const shuffleHandler = () => {
-		shuffle();
-	};
-
 	const handleKeydown = (e: KeyboardEvent) => {
-		if (e.code === 'Space') shuffleHandler();
+		if (e.code === 'Space') shuffleHandles();
 		if (e.code === 'KeyC') copyHandler();
-		if (e.code === 'KeyR') resetHandler();
+		if (e.code === 'KeyR') resetHandles();
 	};
 </script>
 
@@ -62,11 +54,11 @@
 				/>
 			</div>
 			<div class="flex gap-2">
-				<Button variant="secondary" on:click={shuffleHandler}>
+				<Button variant="secondary" on:click={shuffleHandles}>
 					<ShuffleIcon />
 				</Button>
 				<Button variant="primary" class="px-12" on:click={copyHandler}>Copy</Button>
-				<Button variant="destructive" on:click={resetHandler}>
+				<Button variant="destructive" on:click={resetHandles}>
 					<RefreshIcon />
 				</Button>
 			</div>
