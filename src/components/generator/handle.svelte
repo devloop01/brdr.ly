@@ -20,18 +20,16 @@
 	const positionStyles = writable('');
 
 	const drag: Action = (node) => {
-		const containment = node.parentElement!;
-
-		let currentMatrix = new DOMMatrix();
+		const parent = node.parentElement!;
 
 		const dragInstance = new DragGesture(
 			node,
-			({ delta: [dx, dy], down }) => {
+			({ delta: [dx, dy] }) => {
 				const { x, y, width, height } = node.getBoundingClientRect();
 
 				let p = [
-					(x - containment.offsetLeft) / (containment.offsetWidth - width),
-					(y - containment.offsetTop) / (containment.offsetHeight - height)
+					(x - parent.offsetLeft) / (parent.offsetWidth - width),
+					(y - parent.offsetTop) / (parent.offsetHeight - height)
 				];
 				p = p.map((v) => clamp(Math.floor(v * 101), 0, 100));
 
@@ -39,22 +37,12 @@
 
 				update(handle.id, progress);
 
-				// Extract the existing transformation matrix
-				const existingMatrix = new DOMMatrix(window.getComputedStyle(node).getPropertyValue('transform'));
-
-				// Create a translation matrix
-				const translationMatrix = new DOMMatrix();
-				translationMatrix.translateSelf(dx, dy);
-
-				// Combine the existing matrix with the translation matrix
-				currentMatrix = existingMatrix.multiplySelf(translationMatrix);
-
-				// Apply the combined matrix to the element
-				node.style.transform = currentMatrix.toString();
+				const currentMatrix = new DOMMatrix(node.style.transform);
+				node.style.transform = currentMatrix.translate(dx, dy).toString();
 			},
 			{
 				axis: handle.axis,
-				bounds: containment,
+				bounds: parent,
 				rubberband: true
 			}
 		);
@@ -87,11 +75,12 @@
 </script>
 
 <div
-	bind:this={handleRef}
+	data-generator-handle
 	use:drag
+	bind:this={handleRef}
 	data-id={handle.id}
 	style={$positionStyles}
-	class={'generator-handle ' + (handle.axis === 'x' ? 'active:cursor-ew-resize' : 'active:cursor-ns-resize')}
+	class={handle.axis === 'x' ? 'active:cursor-ew-resize' : 'active:cursor-ns-resize'}
 />
 
 <style lang="postcss">

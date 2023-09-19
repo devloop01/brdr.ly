@@ -8,9 +8,9 @@
 	} = ctx.popup.get();
 </script>
 
-<div class="generator">
-	<div class="generator-shape__wrapper">
-		<div class="generator-shape" style="border-radius: {createRadiusTextFromHandles($handles)}" />
+<div data-generator class="border-2 border-red-500">
+	<div data-generator-shape-wrapper>
+		<div data-generator-shape style="border-radius: {createRadiusTextFromHandles($handles)}" />
 	</div>
 
 	{#each $handles as handle}

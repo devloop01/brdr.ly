@@ -1,2 +1,2 @@
-export { default as Generator } from './index.svelte';
+export { default as Generator } from './generator.svelte';
 
