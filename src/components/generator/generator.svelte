@@ -8,7 +8,7 @@
 
 	const {
 		states: { handles }
-	} = ctx.popup.get();
+	} = ctx.popup.get().handles;
 </script>
 
 <div data-generator>

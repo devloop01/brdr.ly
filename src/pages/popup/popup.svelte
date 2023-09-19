@@ -10,7 +10,7 @@
 	const {
 		states: { handles },
 		helpers: { reset, shuffle }
-	} = ctx.popup.set();
+	} = ctx.popup.set().handles;
 
 	let clicked = false;
 	$: radius = createRadiusTextFromHandles($handles);

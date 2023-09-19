@@ -1,18 +1,23 @@
 import { getContext, setContext } from 'svelte';
-import { createHandles } from '~/store';
+import { createHandles, createTheme } from '~/store';
 
 const NAME = 'Popup';
 
-type GetReturn = ReturnType<typeof createHandles>;
-
 function set() {
 	const handles = createHandles();
-	setContext(NAME, handles);
-	return handles;
+	const theme = createTheme();
+
+	const state = {
+		handles,
+		theme
+	};
+
+	setContext(NAME, state);
+	return state;
 }
 
 function get() {
-	return getContext<GetReturn>(NAME);
+	return getContext<ReturnType<typeof set>>(NAME);
 }
 
 export const ctx = { set, get };

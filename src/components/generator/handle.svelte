@@ -15,7 +15,7 @@
 	const {
 		states: { changedAt, handles },
 		helpers: { update }
-	} = ctx.popup.get();
+	} = ctx.popup.get().handles;
 
 	const positionStyles = writable('');
 
