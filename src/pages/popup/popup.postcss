@@ -1,12 +1,11 @@
 @import '~/styles/global.postcss';
 
 @layer base {
-	html {
-		@apply antialiased;
-	}
-
 	body {
-		@apply h-auto min-w-[450px];
+		@apply font-chillax h-auto min-w-[450px] antialiased;
+		font-feature-settings:
+			'rlig' 1,
+			'calt' 1;
 	}
 }
 

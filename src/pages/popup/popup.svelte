@@ -44,7 +44,7 @@
 
 <div class="border-2 border-black">
 	<header class="flex items-end justify-between border-b-2 border-black bg-custom-yellow-light px-3 py-2">
-		<h1 class="select-none text-3xl font-bold tracking-wide">Brdr:ly;</h1>
+		<h1 class="select-none font-croissant-one text-3xl font-bold">brdr:ly;</h1>
 		<p class="w-16 text-right text-xs font-semibold leading-3">create fancy css shapes</p>
 	</header>
 
@@ -56,7 +56,7 @@
 				<label for="radius-text" class="select-none text-base text-white">border-radius:</label>
 				<input
 					id="radius-text"
-					class="'block w-full rounded bg-white px-6 py-3 text-center font-mono text-base tabular-nums shadow-3px ring-2 ring-inset ring-black focus:outline-0"
+					class="block w-full rounded bg-white px-6 py-3 text-center font-mono text-base tabular-nums shadow-3px ring-2 ring-inset ring-black focus:outline-0"
 					value={clicked ? 'Copied!' : radius}
 					readonly
 				/>

@@ -8,8 +8,8 @@ export default {
 	theme: {
 		extend: {
 			fontFamily: {
-				poppins: ['Poppins', ...fontFamily.sans],
-				'whyte-inktrap': ['Whyte Inktrap', ...fontFamily.sans]
+				chillax: ['Chillax', ...fontFamily.sans],
+				'croissant-one': ['Croissant One', ...fontFamily.sans]
 			},
 			boxShadow: {
 				'0px': '0px 0px 0 0 rgb(0 0 0 / 1)',
