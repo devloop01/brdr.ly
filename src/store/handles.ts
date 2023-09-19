@@ -2,7 +2,6 @@ import { writable } from 'svelte/store';
 import type { Handle } from '~/types';
 import { getRandomInt, persisted } from '~/utils';
 
-const LOCAL_STORAGE_KEY = 'brdrly-local';
 const HANDLES_INITIAL_STATE: Handle[] = [
 	{ id: 'top', progress: 0, axis: 'x', position: [0, 0] },
 	{ id: 'right', progress: 0, axis: 'y', position: [100, 0] },
@@ -11,7 +10,7 @@ const HANDLES_INITIAL_STATE: Handle[] = [
 ];
 
 export function createHandles() {
-	const { subscribe, update: localUpdate, set } = persisted(LOCAL_STORAGE_KEY, HANDLES_INITIAL_STATE);
+	const { subscribe, update: localUpdate, set } = persisted('brdrly-handles', HANDLES_INITIAL_STATE);
 	const changedAt = writable(Date.now());
 
 	return {
