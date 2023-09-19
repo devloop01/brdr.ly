@@ -2,8 +2,8 @@
 </script>
 
 <script lang="ts">
-	import { RefreshIcon, ShuffleIcon } from '~/icons';
-	import { Button, Generator } from '~/components';
+	import { ResetIcon, ShuffleIcon } from '~/icons';
+	import { Button, Generator, ThemeToggle } from '~/components';
 	import { createRadiusTextFromHandles, writeToClipboard } from '~/utils';
 	import { ctx } from '~/context';
 
@@ -34,13 +34,13 @@
 
 <svelte:window on:keyup={handleKeydown} />
 
-<div class="border-2 border-black">
-	<header class="flex items-end justify-between border-b-2 border-black bg-custom-yellow-light px-3 py-2">
+<div class="bg-gradient-grid border-2 border-black">
+	<header class="flex items-center justify-between border-b-2 border-black bg-custom-yellow-light px-3 py-2">
 		<h1 class="select-none font-croissant-one text-3xl font-bold">brdr:ly;</h1>
-		<p class="w-16 text-right text-xs font-semibold leading-3">create fancy css shapes</p>
+		<ThemeToggle />
 	</header>
 
-	<main class="bg-gradient-grid px-6 py-4">
+	<main class="px-6 py-4">
 		<Generator {radius} />
 
 		<div class="flex flex-col gap-2">
@@ -59,7 +59,7 @@
 				</Button>
 				<Button variant="primary" class="px-12" on:click={copyHandler}>Copy</Button>
 				<Button variant="destructive" on:click={resetHandles}>
-					<RefreshIcon />
+					<ResetIcon />
 				</Button>
 			</div>
 		</div>
