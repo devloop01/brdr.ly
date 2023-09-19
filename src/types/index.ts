@@ -1,7 +1,8 @@
 export type AxisType = 'x' | 'y';
+export type HandleId = 'top' | 'right' | 'bottom' | 'left';
 
 export interface Handle {
-	id: 'top' | 'right' | 'bottom' | 'left';
+	id: HandleId;
 	progress: number;
 	axis: AxisType;
 	position: [number, number];
