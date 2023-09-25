@@ -7,17 +7,17 @@
 
 	import { clamp, mapRange } from '~/utils';
 	import { ctx } from '~/context';
+	import { createEventDispatcher } from 'svelte';
 
 	export let handle: Handle;
 
+	const dispatch = createEventDispatcher();
+
 	let handleRef: HTMLElement | undefined;
 
-	const {
-		states: { changedAt, handles },
-		helpers: { updateHandle }
-	} = ctx.popup.get().handles;
+	const { handles } = ctx.popup.get();
 
-	const positionStyles = writable('');
+	const transform = writable({ x: 0, y: 0 });
 
 	const drag: Action = (node) => {
 		const parent = node.parentElement!;
@@ -25,17 +25,18 @@
 		const dragInstance = new DragGesture(
 			node,
 			({ delta: [dx, dy] }) => {
-				const { x, y, width, height } = node.getBoundingClientRect();
+				const rect = node.getBoundingClientRect();
 
 				let p = [
-					(x - parent.offsetLeft) / (parent.offsetWidth - width),
-					(y - parent.offsetTop) / (parent.offsetHeight - height)
+					(rect.x - parent.offsetLeft) / (parent.offsetWidth - rect.width),
+					(rect.y - parent.offsetTop) / (parent.offsetHeight - rect.height)
 				];
 				p = p.map((v) => clamp(Math.floor(v * 101), 0, 100));
 
 				const progress = handle.axis === 'x' ? p[0] : p[1];
 
-				updateHandle(handle.id, progress);
+				dispatch('update', { id: handle.id, progress });
+				handles.update(handle.id, progress);
 
 				const currentMatrix = new DOMMatrix(node.style.transform);
 				node.style.transform = currentMatrix.translate(dx, dy).toString();
@@ -68,19 +69,19 @@
 
 		const [x, y] = position;
 
-		positionStyles.set(`transform: translate(${x}px, ${y}px)`);
+		transform.set({ x, y });
 	};
 
-	$: handleRef && initialize(handleRef), $changedAt;
+	$: handleRef && initialize(handleRef), handles.changedAt;
 </script>
 
 <div
-	data-generator-handle
 	use:drag
 	bind:this={handleRef}
-	data-id={handle.id}
-	style={$positionStyles}
-	class={handle.axis === 'x' ? 'active:cursor-ew-resize' : 'active:cursor-ns-resize'}
+	style="transform: translate({$transform.x}px, {$transform.y}px)"
+	data-generator-handle
+	data-handle-id={handle.id}
+	data-handle-axis={handle.axis}
 />
 
 <style lang="postcss">

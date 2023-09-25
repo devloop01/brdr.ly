@@ -5,7 +5,6 @@ export * from './persisted';
 export * from './math';
 
 export function createRadiusTextFromHandles(handles: Handle[]): string {
-	// console.log(handles);
 	const getHandleProgress = (hId: Handle['id']): number => handles.filter((h) => h.id === hId)[0].progress;
 
 	const top = getHandleProgress('top');

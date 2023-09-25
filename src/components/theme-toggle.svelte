@@ -1,12 +1,9 @@
 <script lang="ts">
 	import { ctx } from '~/context';
-	import { Button } from '.';
+	import { Button } from '~/components';
 	import { spring } from 'svelte/motion';
 
-	const {
-		states: { theme },
-		helpers: { toggleTheme }
-	} = ctx.popup.get().theme;
+	const { theme } = ctx.popup.get();
 
 	const properties = {
 		dark: {
@@ -25,18 +22,30 @@
 		}
 	};
 
-	let props = spring({ ...properties[$theme] }, { stiffness: 0.085, damping: 0.225 });
-	$: props.set({ ...properties[$theme] });
+	let props = spring({ ...properties[$theme] }, { stiffness: 0.1, damping: 0.35 });
 
 	$: ({ cx, cy, opacity, radius, rotation } = $props);
+
+	$: {
+		props.set({ ...properties[$theme] });
+
+		if ($theme === 'dark') document.documentElement.classList.add('dark');
+		else document.documentElement.classList.remove('dark');
+	}
+
+	$: label = $theme === 'dark' ? 'Use Light Mode' : 'Use Dark Mode';
+
+	function handleClick() {
+		theme.toggle();
+	}
 </script>
 
-<Button size="icon" on:click={toggleTheme}>
+<Button on:click={handleClick} aria-label={label}>
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
-		width="24"
-		height="24"
 		viewBox="0 0 24 24"
+		width="20"
+		height="20"
 		fill="none"
 		stroke="currentColor"
 		stroke-width="2"
@@ -45,11 +54,11 @@
 		style:transform="rotate({rotation}deg)"
 	>
 		<mask id="mask">
-			<rect x="0" y="0" width="100%" height="100%" fill="white" />
+			<rect x="0" y="0" width="100%" height="100%" fill="#fff" />
 			<circle {cx} {cy} r="9" fill="black" />
 		</mask>
 
-		<circle fill="black" cx="12" cy="12" r={radius} mask="url(#mask)" />
+		<circle fill="currentColor" cx="12" cy="12" r={radius} mask="url(#mask)" />
 
 		<g stroke="currentColor" style:opacity>
 			<line x1="12" y1="1" x2="12" y2="3" />

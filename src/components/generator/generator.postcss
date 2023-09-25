@@ -1,21 +1,19 @@
 [data-generator] {
-	--mouse-x: 0;
-	--mouse-y: 0;
+	--size: 300px;
 
 	position: relative;
 	margin: 0 auto;
-	height: 60vmin;
-	width: 60vmin;
+	height: var(--size);
+	width: var(--size);
 	padding: 1rem;
 
 	&:hover {
 		& > [data-generator-handle] {
-			--opacity: 0.7;
-			--scale: 0.7;
+			--scale: 0.6;
 		}
 
 		& > [data-generator-shape-wrapper] {
-			border-color: rgb(255 255 255 / 0.75);
+			outline-color: theme(colors.foreground / 0.35);
 		}
 	}
 }
@@ -23,24 +21,26 @@
 [data-generator-shape-wrapper] {
 	height: 100%;
 	width: 100%;
-	border: 2px dashed rgb(255 255 255 / 0.25);
-	transition-property: border;
-	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-	transition-duration: 300ms;
+	outline: 2px dashed theme(colors.foreground / 0.08);
+	transition: outline-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 [data-generator-shape] {
 	height: 100%;
 	width: 100%;
-	background: var(--purple-light);
-	background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), var(--purple-light) 0%, var(--purple-dark) 100%);
-	box-shadow: 1.25rem 1.25rem 0 0 rgb(0 0 0 / 0.2);
+	background: radial-gradient(
+			800px circle at var(--mouse-x, 0) var(--mouse-y, 0),
+			hsl(0 0% 100% / 0.4) 0%,
+			transparent 100%
+		),
+		theme(colors.primary.DEFAULT);
+	box-shadow: var(--shadow-x, 20px) var(--shadow-y, 20px) 2px 0 hsl(0 0% 0% / 0.35);
 }
 
 [data-generator-handle] {
 	--size: 2rem;
-	--scale: 0.5;
-	--opacity: 0.25;
+	--scale: 0;
+	--opacity: 1;
 	--ring-opacity: 0;
 	--ring-size: 0px;
 
@@ -50,8 +50,16 @@
 	display: block;
 	height: var(--size);
 	width: var(--size);
-	cursor: grab;
+	cursor: var(--cursor-grab);
 	touch-action: none;
+
+	&:active[data-handle-axis='x'] {
+		cursor: theme(cursor.resize-we);
+	}
+
+	&:active[data-handle-axis='y'] {
+		cursor: theme(cursor.resize-ns);
+	}
 
 	&::before {
 		content: '';
@@ -62,21 +70,19 @@
 		top: 50%;
 		transform: translate(-50%, -50%) scale(var(--scale));
 		border-radius: 50%;
-		background-color: white;
+		background-color: theme(colors.foreground);
 		opacity: var(--opacity);
-		transition-property: opacity, transform, box-shadow, background;
+		transition-property: opacity, transform, box-shadow;
 		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 		transition-duration: 300ms;
-		box-shadow: 0 0 0 var(--ring-size) rgb(255 255 255 / var(--ring-opacity));
+		box-shadow: 0 0 0 var(--ring-size) theme(colors.foreground / var(--ring-opacity));
 	}
 
 	&:hover::before {
 		--scale: 1;
 		--opacity: 1;
 		--ring-size: 8px;
-		--ring-opacity: 1;
-
-		background-color: var(--purple-light);
+		--ring-opacity: 0.2;
 	}
 }
 

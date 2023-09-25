@@ -10,3 +10,4 @@ export interface Handle {
 
 export type Theme = 'light' | 'dark';
 
+export type Mouse = { x: number; y: number };
