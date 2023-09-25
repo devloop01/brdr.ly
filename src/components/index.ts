@@ -1,4 +1,5 @@
 export * from './generator';
-export { default as Button } from './button.svelte';
+export { Button } from './button';
 export { default as ThemeToggle } from './theme-toggle.svelte';
+export { default as MotionToggle } from './motion-toggle.svelte';
 

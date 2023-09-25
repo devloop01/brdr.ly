@@ -2,15 +2,15 @@
 </script>
 
 <script lang="ts">
-	import { ResetIcon, ShuffleIcon } from '~/icons';
-	import { Button, Generator, ThemeToggle } from '~/components';
+	import { ResetIcon, ShuffleIcon, CopyIcon } from '~/icons';
+	import { Button, Generator, MotionToggle, ThemeToggle } from '~/components';
 	import { createRadiusTextFromHandles, writeToClipboard } from '~/utils';
 	import { ctx } from '~/context';
+	import { shadow } from '~/actions';
 
-	const {
-		states: { handles },
-		helpers: { resetHandles, shuffleHandles }
-	} = ctx.popup.set().handles;
+	const { handles, mouse, motion } = ctx.popup.set();
+
+	let inputRef: HTMLInputElement | undefined;
 
 	let clicked = false;
 	$: radius = createRadiusTextFromHandles($handles);
@@ -25,54 +25,65 @@
 		writeToClipboard('border-radius: ' + radius);
 	};
 
+	const shuffleHandles = () => handles.shuffle();
+	const resetHandles = () => handles.reset();
+
 	const handleKeydown = (e: KeyboardEvent) => {
 		if (e.code === 'Space') shuffleHandles();
 		if (e.code === 'KeyC') copyHandler();
 		if (e.code === 'KeyR') resetHandles();
 	};
+
+	const handleMousemove = (e: MouseEvent) => {
+		const { clientX, clientY } = e;
+		mouse.set({ x: clientX, y: clientY });
+	};
+
+	$: inputRef && shadow(inputRef, { mouse: $mouse, maxLength: 3, disabled: $motion === 'disabled' });
 </script>
 
-<svelte:window on:keyup={handleKeydown} />
+<svelte:window on:keyup={handleKeydown} on:mousemove={handleMousemove} />
 
-<div class="bg-gradient-grid border-2 border-black">
-	<header class="flex items-center justify-between border-b-2 border-black bg-custom-yellow-light px-3 py-2">
-		<h1 class="select-none font-croissant-one text-3xl font-bold">brdr:ly;</h1>
-		<ThemeToggle />
+<div class="bg-background">
+	<header class="flex justify-center p-4 pb-0">
+		<h1 class="select-none font-croissant-one text-2xl font-bold">brdr.ly</h1>
 	</header>
 
-	<main class="px-6 py-4">
-		<Generator {radius} />
+	<main class="p-5 pt-0">
+		<div class="py-3">
+			<Generator {radius} />
+		</div>
 
 		<div class="flex flex-col gap-2">
-			<div>
-				<label for="radius-text" class="select-none text-base text-white">border-radius:</label>
+			<div class="mb-1.5">
+				<span class="select-none text-base font-medium">border-radius:</span>
 				<input
+					bind:this={inputRef}
+					type="text"
 					id="radius-text"
-					class="block w-full rounded bg-white px-6 py-3 text-center font-mono text-base tabular-nums shadow-3px ring-2 ring-inset ring-black focus:outline-0"
+					class="block w-full rounded bg-transparent px-6 py-3 text-center font-mono text-base tabular-nums shadow-[var(--shadow-x,3px)_var(--shadow-y,3px)_0px_0px_rgba(0,0,0)] ring-2 ring-inset ring-black focus:outline-0"
 					value={clicked ? 'Copied!' : radius}
 					readonly
 				/>
 			</div>
-			<div class="flex gap-2">
-				<Button variant="secondary" on:click={shuffleHandles}>
-					<ShuffleIcon />
-				</Button>
-				<Button variant="primary" class="px-12" on:click={copyHandler}>Copy</Button>
-				<Button variant="destructive" on:click={resetHandles}>
-					<ResetIcon />
-				</Button>
+			<div class="flex justify-between">
+				<div class="flex gap-2">
+					<Button on:click={shuffleHandles} aria-label="Shuffle Handles Position">
+						<ShuffleIcon w={20} h={20} />
+					</Button>
+					<Button on:click={copyHandler} aria-label="Copy Border Radius Text">
+						<CopyIcon w={20} h={20} />
+					</Button>
+					<Button on:click={resetHandles} aria-label="Reset Handles Position">
+						<ResetIcon w={20} h={20} />
+					</Button>
+				</div>
+
+				<div class="flex gap-2">
+					<MotionToggle />
+					<ThemeToggle />
+				</div>
 			</div>
 		</div>
 	</main>
 </div>
-
-<style lang="postcss">
-	.bg-gradient-grid {
-		background:
-			linear-gradient(90deg, transparent 0%, 98%, theme(colors.custom.purple.light) 98%) 0px 0px / 50px 50px repeat
-				repeat,
-			linear-gradient(0deg, theme(colors.custom.purple.dark) 0%, 98%, theme(colors.custom.purple.light) 98%) 0px 0px /
-				50px 50px repeat repeat;
-		background-position: 25px 25px;
-	}
-</style>

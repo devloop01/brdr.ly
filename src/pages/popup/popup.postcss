@@ -2,10 +2,32 @@
 
 @layer base {
 	body {
-		@apply font-chillax h-auto min-w-[450px] antialiased;
+		@apply text-foreground h-auto min-w-[450px] cursor-default font-chillax antialiased;
 		font-feature-settings:
 			'rlig' 1,
 			'calt' 1;
+	}
+
+	span,
+	p,
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	input[type='text'],
+	input[type='tel'],
+	input[type='email'],
+	input[type='search'] {
+		cursor: var(--cursor-text);
+	}
+
+	a,
+	a *,
+	button,
+	button * {
+		cursor: var(--cursor-pointer);
 	}
 }
 

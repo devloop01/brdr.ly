@@ -1,8 +1,13 @@
+<script lang="ts">
+	export let w: number = 24;
+	export let h: number = 24;
+</script>
+
 <svg
 	xmlns="http://www.w3.org/2000/svg"
 	viewBox="0 0 24 24"
-	width="24"
-	height="24"
+	width={w}
+	height={h}
 	fill="none"
 	stroke="currentColor"
 	stroke-linecap="round"

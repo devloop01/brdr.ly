@@ -11,23 +11,32 @@ export default {
 				chillax: ['Chillax', ...fontFamily.sans],
 				'croissant-one': ['Croissant One', ...fontFamily.sans]
 			},
-			boxShadow: {
-				'0px': '0px 0px 0 0 rgb(0 0 0 / 1)',
-				'1.5px': '1.5px 1.5px 0 0 rgb(0 0 0 / 1)',
-				'3px': '3px 3px 0 0 rgba(0 0 0 / 1)'
-			},
 			colors: {
-				custom: {
-					purple: { light: 'var(--purple-light)', dark: 'var(--purple-dark)' },
-					yellow: { light: 'var(--yellow-light)', dark: 'var(--yellow-dark)' },
-					pink: { light: 'var(--pink-light)', dark: 'var(--pink-dark)' },
-					green: { light: 'var(--green-light)', dark: 'var(--green-dark)' }
+				background: 'hsl(var(--background))',
+				foreground: 'hsl(var(--foreground))',
+				primary: {
+					DEFAULT: 'hsl(var(--primary))',
+					foreground: 'hsl(var(--primary-foreground))'
 				},
-				text: 'var(--text)',
-				background: 'var(--background)',
-				primary: 'var(--primary)',
-				secondary: 'var(--secondary)',
-				accent: 'var(--accent)'
+				secondary: {
+					DEFAULT: 'hsl(var(--secondary))',
+					foreground: 'hsl(var(--secondary-foreground))'
+				},
+				accent: {
+					DEFAULT: 'hsl(var(--accent))',
+					foreground: 'hsl(var(--accent-foreground))'
+				},
+				destructive: 'hsl(var(--destructive))',
+				ring: 'hsl(var(--ring))'
+			},
+			cursor: {
+				default: 'var(--cursor-default)',
+				pointer: 'var(--cursor-pointer)',
+				grab: 'var(--cursor-grab)',
+				grabbed: 'var(--cursor-grabbed)',
+				text: 'var(--cursor-text)',
+				'resize-ns': 'var(--cursor-resize-ns)',
+				'resize-we': 'var(--cursor-resize-we)'
 			}
 		}
 	},

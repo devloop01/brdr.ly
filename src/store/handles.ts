@@ -10,38 +10,34 @@ const HANDLES_INITIAL_STATE: Handle[] = [
 ];
 
 export function createHandles() {
-	const { subscribe, update: localUpdate, set } = persisted('brdrly-handles', HANDLES_INITIAL_STATE);
+	const local = persisted('brdrly-handles', HANDLES_INITIAL_STATE);
 	const changedAt = writable(Date.now());
 
 	return {
-		states: {
-			handles: { subscribe },
-			changedAt: { subscribe: changedAt.subscribe }
+		subscribe: local.subscribe,
+		changedAt: { subscribe: changedAt.subscribe },
+		update: (id: string, progress: number) => {
+			local.update((handles) => {
+				const updatedHandles = handles.map((handle) => ({
+					...handle,
+					progress: handle.id === id ? progress : handle.progress
+				}));
+				return updatedHandles;
+			});
 		},
-		helpers: {
-			updateHandle: (id: string, progress: number) => {
-				localUpdate((handles) => {
-					const updatedHandles = handles.map((handle) => ({
-						...handle,
-						progress: handle.id === id ? progress : handle.progress
-					}));
-					return updatedHandles;
-				});
-			},
-			resetHandles: () => {
-				changedAt.set(Date.now());
-				set(HANDLES_INITIAL_STATE);
-			},
-			shuffleHandles: () => {
-				changedAt.set(Date.now());
-				localUpdate((handles) => {
-					const updatedHandles = handles.map((handle) => ({
-						...handle,
-						progress: getRandomInt(0, 100)
-					}));
-					return updatedHandles;
-				});
-			}
+		reset: () => {
+			changedAt.set(Date.now());
+			local.set(HANDLES_INITIAL_STATE);
+		},
+		shuffle: () => {
+			changedAt.set(Date.now());
+			local.update((handles) => {
+				const updatedHandles = handles.map((handle) => ({
+					...handle,
+					progress: getRandomInt(0, 100)
+				}));
+				return updatedHandles;
+			});
 		}
 	};
 }

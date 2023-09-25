@@ -1,15 +1,19 @@
 import { getContext, setContext } from 'svelte';
-import { createHandles, createTheme } from '~/store';
+import { createHandles, createTheme, createMouse, createMotionToggle } from '~/store';
 
 const NAME = 'Popup';
 
 function set() {
 	const handles = createHandles();
 	const theme = createTheme();
+	const mouse = createMouse();
+	const motion = createMotionToggle();
 
 	const state = {
 		handles,
-		theme
+		theme,
+		mouse,
+		motion
 	};
 
 	setContext(NAME, state);

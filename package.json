@@ -1,7 +1,7 @@
 {
 	"name": "brdr-ly",
 	"displayName": "Brdr.ly - Create Fancy CSS Shapes",
-	"version": "2.0.0",
+	"version": "3.0.0",
 	"description": "A tool that will help you quickly create fancy CSS shapes easily",
 	"author": "Sikriti Dakua",
 	"license": "MIT",
@@ -49,3 +49,4 @@
 		"tailwind-merge": "^1.14.0"
 	}
 }
+
