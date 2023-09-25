@@ -72,7 +72,8 @@
 		transform.set({ x, y });
 	};
 
-	$: handleRef && initialize(handleRef), handles.changedAt;
+	$: changedAt = handles.changedAt;
+	$: handleRef && initialize(handleRef), $changedAt;
 </script>
 
 <div
