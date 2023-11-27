@@ -1,8 +1,11 @@
 import type { Handle } from '~/types';
 
-export * from './cva';
 export * from './persisted';
 export * from './math';
+
+export function cn(...classes: (string | undefined | null)[]) {
+	return classes.filter(Boolean).join(' ');
+}
 
 export function createRadiusTextFromHandles(handles: Handle[]): string {
 	const getHandleProgress = (hId: Handle['id']): number => handles.filter((h) => h.id === hId)[0].progress;

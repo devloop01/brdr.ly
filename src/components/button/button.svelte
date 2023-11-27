@@ -1,35 +1,11 @@
-<script lang="ts" context="module">
-	import { cva, cx } from '~/utils';
-	import type { VariantProps } from 'cva';
-	import type { HTMLButtonAttributes } from 'svelte/elements';
-
-	export const buttonVariants = cva({
-		base: 'btn',
-		variants: {
-			variant: {
-				default: '',
-				primary: 'btn-primary',
-				secondary: 'btn-secondary',
-				accent: 'btn-accent'
-			}
-		},
-		defaultVariants: {
-			variant: 'default'
-		}
-	});
-
-	export type ButtonVariants = VariantProps<typeof buttonVariants>;
-</script>
-
 <script lang="ts">
+	import type { HTMLButtonAttributes } from 'svelte/elements';
+	import { cn } from '~/utils';
 	import { ctx } from '~/context';
 	import { shadow } from '~/actions';
 
-	interface $$Props extends HTMLButtonAttributes {
-		variant?: ButtonVariants['variant'];
-	}
+	interface $$Props extends HTMLButtonAttributes {}
 
-	export let variant: $$Props['variant'] = 'default';
 	let className: $$Props['class'] = undefined;
 	export { className as class };
 
@@ -40,9 +16,9 @@
 	$: buttonRef && shadow(buttonRef, { mouse: $mouse, maxLength: 2, disabled: $motion === 'disabled' });
 </script>
 
-<button bind:this={buttonRef} class={buttonVariants({ variant })} on:click type="button" {...$$restProps}>
+<button bind:this={buttonRef} class="btn" on:click type="button" {...$$restProps}>
 	<span class="btn--back"></span>
-	<span class={cx('btn--front', className)}>
+	<span class={cn('btn--front', className)}>
 		<slot />
 	</span>
 </button>
@@ -108,40 +84,5 @@
 		padding-left: var(--btn-padding);
 		padding-right: var(--btn-padding);
 		font-size: var(--btn-font-size);
-	}
-
-	/************** VARIANTS ******************/
-
-	.btn-primary {
-		--btn-background: theme(colors.primary.DEFAULT);
-		--btn-foreground: theme(colors.primary.foreground);
-	}
-
-	.btn-secondary {
-		--btn-background: theme(colors.secondary.DEFAULT);
-		--btn-foreground: theme(colors.secondary.foreground);
-	}
-
-	.btn-accent {
-		--btn-background: theme(colors.accent.DEFAULT);
-		--btn-foreground: theme(colors.accent.foreground);
-	}
-
-	/************** SIZES ******************/
-
-	.btn-sm {
-		--btn-height: theme(height.8);
-		--btn-padding: theme(padding.3);
-		--btn-font-size: theme(fontSize.xs);
-	}
-
-	.btn-lg {
-		--btn-height: theme(height.14);
-		--btn-padding: theme(padding.8);
-		--btn-font-size: theme(fontSize.xl);
-	}
-
-	.btn-wide {
-		--btn-padding: theme(padding.12);
 	}
 </style>

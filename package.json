@@ -44,8 +44,7 @@
 		}
 	},
 	"dependencies": {
-		"@use-gesture/vanilla": "^10.3.0",
-		"cva": "1.0.0-beta.1",
-		"tailwind-merge": "^1.14.0"
+		"@use-gesture/vanilla": "^10.3.0"
 	}
 }
+
