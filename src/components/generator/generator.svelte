@@ -12,15 +12,15 @@
 	let shapeRef = $state<HTMLDivElement>();
 	let shapeRect = $state<DOMRect>(new DOMRect());
 
-	const mouseX = $derived($motion === 'enabled' ? $mouse.x - shapeRect.left : 0);
-	const mouseY = $derived($motion === 'enabled' ? $mouse.y - shapeRect.top : 0);
+	const mouseX = $derived(motion.value === 'enabled' ? $mouse.x - shapeRect.left : 0);
+	const mouseY = $derived(motion.value === 'enabled' ? $mouse.y - shapeRect.top : 0);
 
 	$effect(() => {
 		if (shapeRef) shapeRect = shapeRef.getBoundingClientRect();
 	});
 
 	$effect(() => {
-		if (shapeRef) shadow(shapeRef, { mouse: $mouse, maxLength: 20, disabled: $motion === 'disabled' });
+		if (shapeRef) shadow(shapeRef, { mouse: $mouse, maxLength: 20, disabled: motion.value === 'disabled' });
 	});
 </script>
 
@@ -35,7 +35,7 @@
 		></div>
 	</div>
 
-	{#each $handles as handle}
+	{#each handles.value as handle}
 		<Handle {handle} />
 	{/each}
 </div>

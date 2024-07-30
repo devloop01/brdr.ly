@@ -19,14 +19,14 @@
 		}
 	};
 
-	const selectedProps = spring({ ...properties[$motion] }, { stiffness: 0.1, damping: 0.2 });
+	const selectedProps = spring({ ...properties[motion.value] }, { stiffness: 0.1, damping: 0.2 });
 	const { opacity, scale, rotation } = $derived($selectedProps);
 
 	$effect.pre(() => {
-		selectedProps.set({ ...properties[$motion] });
+		selectedProps.set({ ...properties[motion.value] });
 	});
 
-	const label = $derived($motion === 'enabled' ? 'Disable Shadow Animation' : 'Enable Shadow Animation');
+	const label = $derived(motion.value === 'enabled' ? 'Disable Shadow Animation' : 'Enable Shadow Animation');
 
 	function handleClick() {
 		motion.toggle();

@@ -1,6 +1,6 @@
 import type { Handle } from '~/types';
 
-export * from './persisted';
+export * from './persisted.svelte';
 export * from './math';
 
 export function cn(...classes: (string | undefined | null)[]) {
@@ -34,4 +34,3 @@ export const writeToClipboard = async (str: string) => {
 		throw new Error('Failed to copy!');
 	}
 };
-

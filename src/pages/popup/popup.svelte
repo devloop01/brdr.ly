@@ -19,7 +19,7 @@
 	let inputRef = $state<HTMLInputElement>();
 
 	let clicked = $state(false);
-	const radius = $derived(createRadiusTextFromHandles($handles));
+	const radius = $derived(createRadiusTextFromHandles(handles.value));
 
 	const copyHandler = () => {
 		clicked = true;
@@ -60,7 +60,7 @@
 
 	$effect(() => {
 		if (inputRef) {
-			shadow(inputRef, { mouse: $mouse, maxLength: 3, disabled: $motion === 'disabled' });
+			shadow(inputRef, { mouse: $mouse, maxLength: 3, disabled: motion.value === 'disabled' });
 		}
 	});
 </script>

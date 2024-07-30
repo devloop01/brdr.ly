@@ -13,7 +13,7 @@
 	let buttonRef = $state<HTMLButtonElement>();
 
 	$effect(() => {
-		if (buttonRef) shadow(buttonRef, { mouse: $mouse, maxLength: 2, disabled: $motion === 'disabled' });
+		if (buttonRef) shadow(buttonRef, { mouse: $mouse, maxLength: 2, disabled: motion.value === 'disabled' });
 	});
 </script>
 

@@ -23,25 +23,21 @@
 		}
 	};
 
-	const selectedProps = spring({ ...properties[$theme] }, { stiffness: 0.1, damping: 0.35 });
+	const selectedProps = spring({ ...properties[theme.value] }, { stiffness: 0.1, damping: 0.35 });
 
 	const { cx, cy, opacity, radius, rotation } = $derived($selectedProps);
 
-	const label = $derived($theme === 'dark' ? 'Use Light Mode' : 'Use Dark Mode');
-
-	function handleClick() {
-		theme.toggle();
-	}
+	const label = $derived(theme.value === 'dark' ? 'Use Light Mode' : 'Use Dark Mode');
 
 	$effect.pre(() => {
-		selectedProps.set({ ...properties[$theme] });
+		selectedProps.set({ ...properties[theme.value] });
 
-		if ($theme === 'dark') document.documentElement.classList.add('dark');
+		if (theme.value === 'dark') document.documentElement.classList.add('dark');
 		else document.documentElement.classList.remove('dark');
 	});
 </script>
 
-<Button onclick={handleClick} aria-label={label}>
+<Button onclick={theme.toggle} aria-label={label}>
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		viewBox="0 0 24 24"

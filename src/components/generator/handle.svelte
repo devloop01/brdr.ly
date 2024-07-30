@@ -20,12 +20,12 @@
 	let handleRef = $state<HTMLElement>();
 	const transform = $state({ x: 0, y: 0 });
 
-	const progress = $derived($handles.find((h) => h.id === handle.id)!.progress);
+	const progress = $derived(handles.value.find((h) => h.id === handle.id)!.progress);
 	const { changedAt } = $derived(handles);
 
 	$effect(() => {
 		if (handleRef) untrack(() => initialize(handleRef!));
-		$changedAt;
+		changedAt;
 	});
 
 	const initialize: Action = (node) => {

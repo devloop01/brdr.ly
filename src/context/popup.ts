@@ -1,5 +1,5 @@
 import { getContext, setContext } from 'svelte';
-import { createHandles, createTheme, createMouse, createMotionToggle } from '~/store';
+import { createHandles, createTheme, createMouse, createMotionToggle } from '~/store/index.svelte';
 
 const NAME = 'Popup';
 
@@ -9,12 +9,7 @@ function set() {
 	const mouse = createMouse();
 	const motion = createMotionToggle();
 
-	const state = {
-		handles,
-		theme,
-		mouse,
-		motion
-	};
+	const state = { handles, theme, mouse, motion };
 
 	setContext(NAME, state);
 	return state;
@@ -25,4 +20,3 @@ function get() {
 }
 
 export const ctx = { set, get };
-
