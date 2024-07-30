@@ -1,7 +1,6 @@
-<script lang="ts" context="module">
-</script>
-
 <script lang="ts">
+	import './popup.postcss';
+
 	import { ResetIcon, ShuffleIcon, CopyIcon } from '~/icons';
 	import { Button, Generator, MotionToggle, ThemeToggle } from '~/components';
 	import { createRadiusTextFromHandles, writeToClipboard } from '~/utils';
