@@ -1,3 +1,4 @@
+import { mount } from 'svelte';
 import Popup from './popup.svelte';
 
-new Popup({ target: document.body });
+mount(Popup, { target: document.body });
