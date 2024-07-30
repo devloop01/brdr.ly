@@ -1,18 +1,25 @@
 <script lang="ts">
 	import './popup.postcss';
 
-	import { ResetIcon, ShuffleIcon, CopyIcon } from '~/icons';
-	import { Button, Generator, MotionToggle, ThemeToggle } from '~/components';
 	import { createRadiusTextFromHandles, writeToClipboard } from '~/utils';
 	import { ctx } from '~/context';
 	import { shadow } from '~/actions';
 
+	import Button from '~/components/button.svelte';
+	import Generator from '~/components/generator/generator.svelte';
+	import MotionToggle from '~/components/motion-toggle.svelte';
+	import ThemeToggle from '~/components/theme-toggle.svelte';
+
+	import CopyIcon from '~/components/icons/copy.svelte';
+	import ResetIcon from '~/components/icons/reset.svelte';
+	import ShuffleIcon from '~/components/icons/shuffle.svelte';
+
 	const { handles, mouse, motion } = ctx.popup.set();
 
-	let inputRef: HTMLInputElement | undefined;
+	let inputRef = $state<HTMLInputElement>();
 
-	let clicked = false;
-	$: radius = createRadiusTextFromHandles($handles);
+	let clicked = $state(false);
+	const radius = $derived(createRadiusTextFromHandles($handles));
 
 	const copyHandler = () => {
 		clicked = true;
@@ -28,9 +35,22 @@
 	const resetHandles = () => handles.reset();
 
 	const handleKeydown = (e: KeyboardEvent) => {
-		if (e.code === 'Space') shuffleHandles();
-		if (e.code === 'KeyC') copyHandler();
-		if (e.code === 'KeyR') resetHandles();
+		switch (e.code) {
+			case 'Space':
+				shuffleHandles();
+				break;
+			case 'KeyC':
+				copyHandler();
+				break;
+			case 'KeyR':
+				resetHandles();
+				break;
+			case 'KeyM':
+				motion.toggle();
+				break;
+			default:
+				break;
+		}
 	};
 
 	const handleMousemove = (e: MouseEvent) => {
@@ -38,10 +58,14 @@
 		mouse.set({ x: clientX, y: clientY });
 	};
 
-	$: inputRef && shadow(inputRef, { mouse: $mouse, maxLength: 3, disabled: $motion === 'disabled' });
+	$effect(() => {
+		if (inputRef) {
+			shadow(inputRef, { mouse: $mouse, maxLength: 3, disabled: $motion === 'disabled' });
+		}
+	});
 </script>
 
-<svelte:window on:keyup={handleKeydown} on:mousemove={handleMousemove} />
+<svelte:window onkeyup={handleKeydown} onmousemove={handleMousemove} />
 
 <div class="bg-background">
 	<header class="flex justify-center p-4 pb-0">
@@ -67,14 +91,14 @@
 			</div>
 			<div class="flex justify-between">
 				<div class="flex gap-2">
-					<Button on:click={shuffleHandles} aria-label="Shuffle Handles Position">
-						<ShuffleIcon w={20} h={20} />
+					<Button onclick={shuffleHandles} aria-label="Shuffle Handles Position">
+						<ShuffleIcon size={20} />
 					</Button>
-					<Button on:click={copyHandler} aria-label="Copy Border Radius Text">
-						<CopyIcon w={20} h={20} />
+					<Button onclick={copyHandler} aria-label="Copy Border Radius Text">
+						<CopyIcon size={20} />
 					</Button>
-					<Button on:click={resetHandles} aria-label="Reset Handles Position">
-						<ResetIcon w={20} h={20} />
+					<Button onclick={resetHandles} aria-label="Reset Handles Position">
+						<ResetIcon size={20} />
 					</Button>
 				</div>
 

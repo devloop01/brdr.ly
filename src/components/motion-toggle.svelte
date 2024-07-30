@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { spring } from 'svelte/motion';
-	import { Button } from '~/components';
 	import { ctx } from '~/context/popup';
+
+	import Button from '~/components/button.svelte';
 
 	const { motion } = ctx.get();
 
@@ -18,19 +19,21 @@
 		}
 	};
 
-	const props = spring({ ...properties[$motion] }, { stiffness: 0.1, damping: 0.2 });
-	$: ({ opacity, scale, rotation } = $props);
+	const selectedProps = spring({ ...properties[$motion] }, { stiffness: 0.1, damping: 0.2 });
+	const { opacity, scale, rotation } = $derived($selectedProps);
 
-	$: props.set({ ...properties[$motion] });
+	$effect.pre(() => {
+		selectedProps.set({ ...properties[$motion] });
+	});
 
-	$: label = $motion === 'enabled' ? 'Disable Shadow Animation' : 'Enable Shadow Animation';
+	const label = $derived($motion === 'enabled' ? 'Disable Shadow Animation' : 'Enable Shadow Animation');
 
 	function handleClick() {
 		motion.toggle();
 	}
 </script>
 
-<Button on:click={handleClick} aria-label={label}>
+<Button onclick={handleClick} aria-label={label}>
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		width="20"

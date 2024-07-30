@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { ctx } from '~/context';
-	import { Button } from '~/components';
 	import { spring } from 'svelte/motion';
+
+	import Button from '~/components/button.svelte';
 
 	const { theme } = ctx.popup.get();
 
@@ -22,25 +23,25 @@
 		}
 	};
 
-	let props = spring({ ...properties[$theme] }, { stiffness: 0.1, damping: 0.35 });
+	const selectedProps = spring({ ...properties[$theme] }, { stiffness: 0.1, damping: 0.35 });
 
-	$: ({ cx, cy, opacity, radius, rotation } = $props);
+	const { cx, cy, opacity, radius, rotation } = $derived($selectedProps);
 
-	$: {
-		props.set({ ...properties[$theme] });
-
-		if ($theme === 'dark') document.documentElement.classList.add('dark');
-		else document.documentElement.classList.remove('dark');
-	}
-
-	$: label = $theme === 'dark' ? 'Use Light Mode' : 'Use Dark Mode';
+	const label = $derived($theme === 'dark' ? 'Use Light Mode' : 'Use Dark Mode');
 
 	function handleClick() {
 		theme.toggle();
 	}
+
+	$effect.pre(() => {
+		selectedProps.set({ ...properties[$theme] });
+
+		if ($theme === 'dark') document.documentElement.classList.add('dark');
+		else document.documentElement.classList.remove('dark');
+	});
 </script>
 
-<Button on:click={handleClick} aria-label={label}>
+<Button onclick={handleClick} aria-label={label}>
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		viewBox="0 0 24 24"

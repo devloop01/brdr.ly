@@ -8,8 +8,8 @@ export default {
 	theme: {
 		extend: {
 			fontFamily: {
-				chillax: ['Chillax', ...fontFamily.sans],
-				'croissant-one': ['Croissant One', ...fontFamily.sans]
+				chillax: ['var(--font-chillax)', ...fontFamily.sans],
+				'croissant-one': ['var(--font-croissant-one)', ...fontFamily.sans]
 			},
 			colors: {
 				background: 'hsl(var(--background))',
@@ -54,4 +54,3 @@ export default {
 		})
 	]
 } satisfies Config;
-

@@ -29,4 +29,3 @@ export const shadow: Action<HTMLElement, { mouse: Mouse; maxLength: number; disa
 	node.style.setProperty('--shadow-x', `${shadowX}px`);
 	node.style.setProperty('--shadow-y', `${shadowY}px`);
 };
-
