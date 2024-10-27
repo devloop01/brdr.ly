@@ -1,12 +1,12 @@
 <script lang="ts">
 	import type { Action } from 'svelte/action';
-	import type { Handle } from '~/types';
+	import type { Handle } from '$lib/types';
 
 	import { untrack } from 'svelte';
 	import { DragGesture } from '@use-gesture/vanilla';
 
-	import { clamp, mapRange } from '~/utils';
-	import { ctx } from '~/context';
+	import { clamp, mapRange } from '$lib/utils';
+	import { ctx } from '$lib/context';
 
 	type Props = {
 		handle: Handle;

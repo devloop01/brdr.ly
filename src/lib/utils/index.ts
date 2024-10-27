@@ -1,4 +1,4 @@
-import type { Handle } from '~/types';
+import type { Handle } from '$lib/types';
 
 export * from './persisted.svelte';
 export * from './math';

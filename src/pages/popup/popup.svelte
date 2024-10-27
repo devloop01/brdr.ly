@@ -1,18 +1,18 @@
 <script lang="ts">
 	import './popup.postcss';
 
-	import { createRadiusTextFromHandles, writeToClipboard } from '~/utils';
-	import { ctx } from '~/context';
-	import { shadow } from '~/actions';
+	import { createRadiusTextFromHandles, writeToClipboard } from '$lib/utils';
+	import { ctx } from '$lib/context';
+	import { shadow } from '$lib/actions';
 
-	import Button from '~/components/button.svelte';
-	import Generator from '~/components/generator/generator.svelte';
-	import MotionToggle from '~/components/motion-toggle.svelte';
-	import ThemeToggle from '~/components/theme-toggle.svelte';
+	import Button from '$lib/components/button.svelte';
+	import Generator from '$lib/components/generator/generator.svelte';
+	import MotionToggle from '$lib/components/motion-toggle.svelte';
+	import ThemeToggle from '$lib/components/theme-toggle.svelte';
 
-	import CopyIcon from '~/components/icons/copy.svelte';
-	import ResetIcon from '~/components/icons/reset.svelte';
-	import ShuffleIcon from '~/components/icons/shuffle.svelte';
+	import CopyIcon from '$lib/components/icons/copy.svelte';
+	import ResetIcon from '$lib/components/icons/reset.svelte';
+	import ShuffleIcon from '$lib/components/icons/shuffle.svelte';
 
 	const { handles, mouse, motion } = ctx.popup.set();
 

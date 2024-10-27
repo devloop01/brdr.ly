@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type { HTMLButtonAttributes } from 'svelte/elements';
-	import { cn } from '~/utils';
-	import { ctx } from '~/context';
-	import { shadow } from '~/actions';
+	import { cn } from '$lib/utils';
+	import { ctx } from '$lib/context';
+	import { shadow } from '$lib/actions';
 
 	type Props = HTMLButtonAttributes;
 

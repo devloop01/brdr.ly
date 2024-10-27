@@ -1,5 +1,5 @@
 import type { Action } from 'svelte/action';
-import type { Mouse } from '~/types';
+import type { Mouse } from '$lib/types';
 
 export const shadow: Action<HTMLElement, { mouse: Mouse; maxLength: number; disabled?: boolean }> = (node, options) => {
 	const { mouse, maxLength, disabled } = options;

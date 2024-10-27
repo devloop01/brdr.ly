@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { ctx } from '~/context';
+	import { ctx } from '$lib/context';
 	import { spring } from 'svelte/motion';
 
-	import Button from '~/components/button.svelte';
+	import Button from '$lib/components/button.svelte';
 
 	const { theme } = ctx.popup.get();
 

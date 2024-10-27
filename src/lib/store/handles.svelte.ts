@@ -1,5 +1,5 @@
-import type { Handle } from '~/types';
-import { getRandomInt, Persisted } from '~/utils';
+import type { Handle } from '$lib/types';
+import { getRandomInt, Persisted } from '$lib/utils';
 
 const HANDLES_INITIAL_STATE: Handle[] = [
 	{ id: 'top', progress: 0, axis: 'x', position: [0, 0] },

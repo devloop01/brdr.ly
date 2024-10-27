@@ -1,6 +1,6 @@
 import { spring } from 'svelte/motion';
-import type { Mouse, Theme } from '~/types';
-import { Persisted } from '~/utils';
+import type { Mouse, Theme } from '$lib/types';
+import { Persisted } from '$lib/utils';
 
 export * from './handles.svelte';
 

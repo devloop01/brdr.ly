@@ -1,5 +1,5 @@
 import { getContext, setContext } from 'svelte';
-import { createHandles, createTheme, createMouse, createMotionToggle } from '~/store/index.svelte';
+import { createHandles, createTheme, createMouse, createMotionToggle } from '$lib/store/index.svelte';
 
 const NAME = 'Popup';
 

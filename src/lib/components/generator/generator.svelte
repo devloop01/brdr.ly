@@ -2,8 +2,8 @@
 	import './generator.postcss';
 
 	import Handle from './handle.svelte';
-	import { ctx } from '~/context';
-	import { shadow } from '~/actions';
+	import { ctx } from '$lib/context';
+	import { shadow } from '$lib/actions';
 
 	let { radius }: { radius: string } = $props();
 

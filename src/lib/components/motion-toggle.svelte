@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { spring } from 'svelte/motion';
-	import { ctx } from '~/context/popup';
+	import { ctx } from '$lib/context/popup';
 
-	import Button from '~/components/button.svelte';
+	import Button from '$lib/components/button.svelte';
 
 	const { motion } = ctx.get();
 
