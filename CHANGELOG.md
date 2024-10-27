@@ -1,5 +1,11 @@
 # brdr-ly
 
+## 3.2.0
+
+### Minor Changes
+
+- d9312d6: upgrade svelte version
+
 ## 3.1.0
 
 ### Minor Changes
